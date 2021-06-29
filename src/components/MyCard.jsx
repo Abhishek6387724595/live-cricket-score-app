@@ -7,17 +7,17 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 //import { getMatchDetail } from "../api/Api.jsx";
 
-const MyCard = () => {
+const MyCard = (props) => {
 
     const getMatchCard=()=>{
         return(
             <>
-            <Card>
+            <Card style={{marginTop:50}}>
                 <CardContent>
                     <Grid container justify="center" alignItems="center" spacing={4}>
                     
                         <Grid item>
-                            <Typography variant="h5">First Team</Typography>
+                            <Typography variant="h5">{props.match["team-1"]}</Typography>
                         </Grid>
                         <Grid item>
                         <img
@@ -27,7 +27,7 @@ const MyCard = () => {
                         />
                         </Grid>
                         <Grid item>
-                            <Typography variant="h5">Second Team</Typography>
+                            <Typography variant="h5">{props.match["team-2"]}</Typography>
                         </Grid>
 
                     </Grid>
@@ -38,8 +38,9 @@ const MyCard = () => {
                         <Button variant="contained" color="primary">
                             Show Details
                         </Button>
-                        <Button variant="contained" color="primary">
-                            {new Date().toString()}
+                        <Button style={{marginLeft:19}} variant="contained" color="primary">
+                            {/* {new Date().toString()} */}
+                            Start Time {new Date(props.match.dateTimeGMT).toLocaleString()}
                         </Button>
                     </Grid>
                 </CardActions>

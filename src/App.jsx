@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import Navbar from "./components/Navbar";
 import MyCard from "./components/MyCard";
+import Grid from '@material-ui/core/Grid';
 //import {getMatches} from "./api/Api.jsx";
 //import { Container, Grid } from "@material-ui/core";
 const API_KEY="SZ5pcaz1Zrdel8jtcTBhEdq9sKz2";
@@ -19,8 +20,8 @@ function App() {
         try{
             const resp=await fetch(`https://cricapi.com/api/matches?apikey=${API_KEY}`);
             const response=await resp.json();
-            console.log(response.matches);
             setMatches(await response.matches);
+            console.log(response.matches);
         }
         catch(error){
             console.log("my error is"+error);
@@ -36,14 +37,19 @@ function App() {
         <div className="App">
             <Navbar/>
             <h1 className="text-center">Welcome to Cricket Live Score App</h1>
-            <MyCard/>
-            {matches.map((match)=>{
+            <Grid container>
+                <Grid sm="3"></Grid>
+                <Grid sm="6">
+                {matches.map((match)=>{
                 return(
                     <>
-                    <MyCard match="match" />
+                    <MyCard key={match.unique_id} match={match} />
                     </>
                 )
             })}
+                </Grid>
+                <Grid sm="3"></Grid>
+            </Grid>
         </div>
         </>
     )
